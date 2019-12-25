@@ -1,3 +1,3 @@
-from ev3dev2.motor import LargeMotor
+from ev3dev2.motor import LargeMotor, OUTPUT_A
 
-motor_1 = LargeMotor(1)
+motor_1 = LargeMotor(OUTPUT_A)
