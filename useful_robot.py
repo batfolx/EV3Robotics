@@ -1,6 +1,9 @@
-from ev3dev2.motor import LargeMotor, OUTPUT_A
+from ev3dev2.motor import LargeMotor, OUTPUT_A, OUTPUT_B
 
-motor_1 = LargeMotor(OUTPUT_A)
+left_motor = LargeMotor(OUTPUT_A)
+right_motor = LargeMotor(OUTPUT_B)
 
 
-motor_1.on_for_degrees(speed=50, degrees=360, brake=True)
+left_motor.on_for_degrees(speed=50, degrees=720, brake=True, block=False)
+right_motor.on_for_degrees(speed=50, degrees=720, brake=True, block=True)
+
