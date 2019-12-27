@@ -21,7 +21,7 @@ def stop(left_motor: LargeMotor, right_motor: LargeMotor):
 
 def backward(left_motor: LargeMotor, right_motor: LargeMotor, seconds=0.5, speed=50):
     left_motor.on_for_seconds(speed=-speed, seconds=seconds, brake=True, block=False)
-    right_motor.on_for_seconds(speed=-speed, seconds=seconds, brake=True, block=False)
+    right_motor.on_for_seconds(speed=-speed, seconds=seconds, brake=True, block=True)
 
 
 def knock_o_matic(bulldozer: MediumMotor, seconds=3, speed=75):
