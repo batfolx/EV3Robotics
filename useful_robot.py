@@ -2,11 +2,10 @@ from ev3dev2.motor import LargeMotor, MediumMotor, OUTPUT_A, OUTPUT_B, OUTPUT_C
 from ev3dev2.sensor.lego import UltrasonicSensor
 from ev3dev2.sensor import INPUT_1
 from ev3dev2.button import Button
-import random
 
 
 def check_distance(eyes: UltrasonicSensor):
-    return eyes.distance_centimeters < 2.5
+    return eyes.distance_centimeters < 7.5
 
 
 def forward(left_motor: LargeMotor, right_motor: LargeMotor, seconds=0.5, speed=50):
