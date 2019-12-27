@@ -6,7 +6,7 @@ import random
 
 
 def check_distance(eyes: UltrasonicSensor):
-    return eyes.distance_centimeters < 5
+    return eyes.distance_centimeters < 2.5
 
 
 def forward(left_motor: LargeMotor, right_motor: LargeMotor, seconds=0.5, speed=50):
@@ -51,13 +51,13 @@ def main():
     while True:
         if check_distance(eyes):
             print("Detected an object in front of me.")
+            stop(left_motor, right_motor)
             knock_o_matic(bulldozer)
             left_and_right(left_motor, right_motor)
             backward(left_motor, right_motor, seconds=2, speed=75)
             turn_left(left_motor)
             stop(left_motor, right_motor)
             forward(left_motor, right_motor, seconds=60)
-
         if button.any():
             stop(left_motor, right_motor)
             break
