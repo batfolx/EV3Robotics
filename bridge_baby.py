@@ -1,4 +1,4 @@
-from ev3dev2.motor import LargeMotor, MediumMotor, OUTPUT_A, OUTPUT_B, OUTPUT_C
+from ev3dev2.motor import LargeMotor, MediumMotor, OUTPUT_A, OUTPUT_B, OUTPUT_C, SpeedPercent
 from ev3dev2.sensor.lego import UltrasonicSensor
 from ev3dev2.sensor import INPUT_1
 from ev3dev2.button import Button
@@ -13,8 +13,24 @@ def stop_cross(cross: MediumMotor):
     cross.stop()
 
 
+def stop_swivel(swivel: LargeMotor):
+    swivel.stop()
+
+
+def scan_right(swivel: LargeMotor):
+    swivel.on_for_degrees(speed=15, degrees=35, block=True)
+
+
+def scan_left(swivel: LargeMotor):
+    swivel.on_for_degrees(speed=15, degrees=-35, block=True)
+
+
+def lock_scan(swivel: LargeMotor):
+    swivel.stop()
+
+
 def detect(eyes: UltrasonicSensor) -> int:
-    speed = 5
+    speed = False
     distance = eyes.distance_centimeters
     if 0 < distance < 30:
         speed = 85
@@ -34,15 +50,20 @@ def detect(eyes: UltrasonicSensor) -> int:
 def bt_threat():
     button = Button()
     bridge_cross = MediumMotor(OUTPUT_A)
+    swivel = LargeMotor(OUTPUT_B)
     eyes = UltrasonicSensor(INPUT_1)
     while True:
-        speed = detect(eyes)
         if button.any():
             stop_cross(bridge_cross)
             break
+        speed = detect(eyes)
+        if speed:
+            spin(bridge_cross, speed)
+        else:
+            scan_left(swivel)
+            scan_right(swivel)
 
-        spin(bridge_cross, speed)
-        time.sleep(1)
+        time.sleep(0.25)
 
 
 bt_threat()
