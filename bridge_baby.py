@@ -19,11 +19,11 @@ def stop_swivel(swivel: LargeMotor):
 
 
 def scan_right(swivel: LargeMotor):
-    swivel.on_for_degrees(speed=5, degrees=45, block=True)
+    swivel.on_for_degrees(speed=SpeedPercent(5), degrees=90, block=True)
 
 
 def scan_left(swivel: LargeMotor):
-    swivel.on_for_degrees(speed=5, degrees=-45, block=True)
+    swivel.on_for_degrees(speed=SpeedPercent(5), degrees=-90, block=True)
 
 
 def lock_scan(swivel: LargeMotor):
