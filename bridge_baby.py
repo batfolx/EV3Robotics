@@ -16,7 +16,7 @@ def stop_cross(cross: MediumMotor):
 def detect(eyes: UltrasonicSensor) -> int:
     speed = 5
     distance = eyes.distance_centimeters
-    if 10 <= distance < 30:
+    if 0 < distance < 30:
         speed = 85
     elif 30 <= distance < 40:
         speed = 60
