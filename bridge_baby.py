@@ -10,7 +10,8 @@ def spin(cross: MediumMotor, speed=10):
 
 
 def stop_cross(cross: MediumMotor):
-    cross.stop()
+    if cross.is_running:
+        cross.stop()
 
 
 def stop_swivel(swivel: LargeMotor):
@@ -18,11 +19,11 @@ def stop_swivel(swivel: LargeMotor):
 
 
 def scan_right(swivel: LargeMotor):
-    swivel.on_for_degrees(speed=15, degrees=35, block=True)
+    swivel.on_for_degrees(speed=5, degrees=45, block=True)
 
 
 def scan_left(swivel: LargeMotor):
-    swivel.on_for_degrees(speed=15, degrees=-35, block=True)
+    swivel.on_for_degrees(speed=5, degrees=-45, block=True)
 
 
 def lock_scan(swivel: LargeMotor):
@@ -60,6 +61,7 @@ def bt_threat():
         if speed:
             spin(bridge_cross, speed)
         else:
+            stop_cross(bridge_cross)
             scan_left(swivel)
             scan_right(swivel)
 
